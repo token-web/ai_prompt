@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko"><head><base target="_top"><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>AI 프롬프트 모음</title>
+<style>
+:root{--navy:#0b1f3a;--paper:#f3f6fb;--ink:#14233a;--mute:#5b6b83;--line:#dbe4f0;--cy:#22d3ee;--cyd:#0e7490;--gold:#ffd166}
+*{box-sizing:border-box}body{margin:0;font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.5}
+a{text-decoration:none}button{font:inherit;cursor:pointer}:focus-visible{outline:3px solid var(--cy);outline-offset:2px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:linear-gradient(120deg,#0b1f3a,#12335c);color:#fff;padding:10px 14px}
+.brand{display:flex;align-items:center;gap:9px;color:#fff;font-weight:800;letter-spacing:1.5px;font-size:14px}
+.free{margin-left:8px;padding:2px 9px;border-radius:99px;background:var(--gold);color:#3a2a00;font-size:11px;letter-spacing:0}
+.pill{display:inline-flex;align-items:center;padding:7px 14px;border-radius:99px;background:var(--cy);color:#052a33;font-weight:800;font-size:13px;white-space:nowrap}
+.adm{background:#7c2d12;color:#fff;padding:7px 14px;font-size:13px;display:none;align-items:center;justify-content:space-between;gap:8px}
+.adm.on{display:flex}.adm button{background:#fff;color:#7c2d12;border:0;border-radius:99px;padding:5px 12px;font-weight:800}
+.wrap{max-width:780px;margin:0 auto;padding:16px 14px 6px}h1{font-size:21px;margin:2px 0}.sub{margin:0 0 12px;color:var(--mute);font-size:14px}
+.q{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;margin-bottom:12px}
+.bar{display:flex;align-items:center;gap:8px;margin-bottom:10px}.back{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}@media(min-width:560px){.grid{grid-template-columns:repeat(3,1fr);gap:12px}}
+.card{--ac:var(--cyd);display:flex;flex-direction:column;justify-content:space-between;min-height:120px;text-align:left;background:#fff;border:1.5px solid var(--line);border-top:5px solid var(--ac);border-radius:14px;padding:11px;color:var(--ink)}
+.card:hover{box-shadow:0 6px 16px rgba(11,31,58,.14)}.card .ic{font-size:24px;display:block}.card b{font-size:14.5px;line-height:1.35;word-break:keep-all}
+.card small{color:var(--mute);font-size:11.5px;line-height:1.3;display:block;margin-top:3px}.card i{font-style:normal;align-self:flex-end;background:var(--ac);color:#fff;border-radius:99px;padding:0 8px;font-size:11px;font-weight:700}
+.tile{aspect-ratio:1/1;min-height:0}.hid{opacity:.55}
+.state{padding:30px 10px;text-align:center;color:var(--mute);grid-column:1/-1}
+.sc{position:fixed;inset:0;background:rgba(6,16,30,.55);display:none;align-items:flex-end;justify-content:center;z-index:20}.sc.on{display:flex}
+.sheet{background:#fff;width:100%;max-width:780px;max-height:93vh;overflow:auto;border-radius:20px 20px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+@media(min-width:700px){.sc{align-items:center}.sheet{border-radius:20px}}
+.hd{display:flex;justify-content:space-between;gap:10px}.hd h2{font-size:19px;margin:0}.x{flex:none;width:36px;height:36px;border-radius:50%;border:0;background:var(--paper);font-size:18px}
+.vers{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.ver{padding:6px 12px;border-radius:8px;border:1.5px solid var(--line);background:#fff;font-size:13px;font-weight:600}.ver[aria-pressed=true]{background:var(--cy);border-color:var(--cy)}
+.ba{position:relative;aspect-ratio:4/3;background:#0b1f3a;border-radius:12px;overflow:hidden;margin:8px 0;user-select:none}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.ba .bf{clip-path:inset(0 calc(100% - var(--p,50%)) 0 0)}
+.ba .ln{position:absolute;top:0;bottom:0;left:var(--p,50%);width:3px;background:#fff;box-shadow:0 0 6px rgba(0,0,0,.5)}
+.ba .kn{position:absolute;top:50%;left:var(--p,50%);transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:#fff;color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.lb{position:absolute;top:8px;padding:3px 10px;border-radius:99px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:800}
+.bd{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.b{padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;background:#e8f1fb;color:#1d4e89}.b.p{background:#fff1e6;color:#c2410c}
+.gd{background:#f7fbff;border-left:4px solid var(--cy);padding:9px 12px;border-radius:6px;font-size:13.5px;margin:8px 0;white-space:pre-wrap}
+.body{background:#0b1f3a;color:#e8f1fb;border-radius:12px;padding:14px;font-size:14px;line-height:1.7;white-space:pre-wrap;word-break:break-word;max-height:42vh;overflow:auto;margin:8px 0}
+.acts{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:10px 16px;border-radius:99px;font-weight:800;font-size:14px;background:var(--paper);color:var(--ink);border:1.5px solid var(--line)}
+.btn.m{background:var(--navy);color:#fff;border-color:var(--navy)}.btn.r{background:#fee2e2;color:#991b1b;border-color:#fecaca}
+.nx{margin-top:10px;font-size:13.5px;color:var(--mute);white-space:pre-wrap}.nx button{border:0;background:none;color:var(--cyd);font-weight:800;text-decoration:underline;padding:0}
+.fm label{display:block;font-size:12.5px;font-weight:700;margin:10px 0 3px;color:var(--mute)}
+.fm input,.fm select,.fm textarea{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:14px}
+.fm textarea{min-height:90px;resize:vertical}.fm img{max-width:100%;max-height:120px;border-radius:8px;margin-top:4px;display:block}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 18px;border-radius:99px;font-size:14px;font-weight:700;z-index:40;display:none;max-width:90%}.toast.on{display:block}
+.ft{margin:20px auto 0;max-width:780px;padding:0 14px calc(22px + env(safe-area-inset-bottom,0px))}
+.fc{background:linear-gradient(160deg,#0b1f3a,#14396a);color:#cfe2fa;border-radius:18px;padding:18px;font-size:13px;line-height:1.65}.fc b{color:#fff}
+.fl{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.fl a{padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:12.5px;font-weight:600}.fl a.li{background:#0a66c2;border-color:#0a66c2}
+.al{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.45);border-radius:12px;padding:10px 12px;margin-top:10px}
+.cp{font-size:11px;color:#8fb0d6;margin:8px 0 0}.cp button{background:none;border:0;color:#8fb0d6;text-decoration:underline;font-size:11px;padding:0 0 0 8px}
+</style></head><body>
+<div class="top"><a class="brand" href="https://token-web.github.io/aiinsightlab/" target="_blank" rel="noopener">
+<svg width="32" height="32" viewBox="0 0 44 44" aria-label="AI Insight Lab"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs><rect width="44" height="44" rx="11" fill="url(#g)"/><text x="22" y="28.5" text-anchor="middle" font-family="Arial" font-weight="800" font-size="19" fill="#06223a">HY</text></svg>
+AIINSIGHT<span class="free">🎁 무료 앱</span></a>
+<a class="pill" href="https://token-web.github.io/album/" target="_blank" rel="noopener">📸 앨범 만들기</a></div>
+<div id="adm" class="adm"><span>🔧 관리자 모드</span><span><button id="addBtn">＋ 프롬프트 추가</button> <button id="outBtn">로그아웃</button></span></div>
+
+<main class="wrap"><h1>AI 프롬프트 모음</h1><p class="sub" id="sub">카테고리를 고르면 프롬프트가 나와요.</p>
+<input id="q" class="q" type="search" placeholder="프롬프트 검색" aria-label="검색"><div id="bar" class="bar"></div><div id="main" class="grid"><div class="state">불러오는 중…</div></div></main>
+
+<div id="sc" class="sc" role="dialog" aria-modal="true"><div class="sheet" id="sheet"></div></div><div id="toast" class="toast" role="status"></div>
+
+<div class="ft"><div class="fc"><b>정한열 교수(AI Insight Lab)</b>가 <a href="https://token-web.github.io/aiinsightlab/" target="_blank" rel="noopener" style="color:#7fd8ff">AI Insight Lab</a>의 자료를 바탕으로 직접 만든 앱이며, 누구나 <b>무료</b>로 사용할 수 있습니다. 대림대학교 교육혁신센터.
+<div class="al"><span><b>📸 나의 추억 앨범 만들기</b> · 사진으로 앨범을 쉽게 만드는 무료 앱</span><a class="pill" href="https://token-web.github.io/album/" target="_blank" rel="noopener">가기 →</a></div>
+<div class="fl"><a href="https://token-web.github.io/aiinsightlab/" target="_blank" rel="noopener">🌐 프로필</a><a href="https://blog.naver.com/patriot_daelim" target="_blank" rel="noopener">N 블로그</a><a href="https://youtube.com/@aiinsightlabkr" target="_blank" rel="noopener">▶ YouTube</a><a class="li" href="https://www.linkedin.com/in/hanyeol-jeong" target="_blank" rel="noopener">in LinkedIn</a></div>
+<p class="cp">FREE · © 2026 Hanyeol Jeong. All rights reserved.<button id="loginBtn">관리자</button></p></div></div>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},D={cats:[],prompts:[]},T=null,cat=null,q='',cur=null,vi=0;
+var COL=['#0e7490','#c2410c','#6d28d9','#15803d','#b91c1c','#1d4ed8','#a16207','#be185d'];
+function call(n){var a=[].slice.call(arguments,1);return new Promise(function(ok,no){var r=google.script.run.withSuccessHandler(ok).withFailureHandler(no);r[n].apply(r,a)})}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function toast(m){var t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(function(){t.classList.remove('on')},2200)}
+function img(id){return 'https://drive.google.com/thumbnail?id='+id+'&sz=w1200'}
+function load(){call(T?'getAdminData':'getData',T).then(function(d){D=d;render()},function(){if(T){T=null;ui();toast('관리자 로그인이 만료됐어요');return load()}$('main').innerHTML='<div class="state">불러오지 못했어요. 새로고침해 주세요.</div>'})}
+function ui(){$('adm').classList.toggle('on',!!T)}
+function ci(n){var k=0;D.cats.forEach(function(c,i){if(c.name===n)k=i});return COL[k%COL.length]}
+
+function render(){var m=$('main'),b=$('bar');m.innerHTML='';b.innerHTML='';var s=q.trim().toLowerCase();
+ if(s){$('sub').textContent='검색 결과';list(D.prompts.filter(function(p){return (p.title+p.cat+p.tag+p.versions.map(function(v){return v.body}).join(' ')).toLowerCase().indexOf(s)>=0}));return}
+ if(cat){var bk=el('button','back','← 카테고리');bk.onclick=function(){cat=null;render()};b.appendChild(bk);b.appendChild(el('b','',cat));$('sub').textContent='프롬프트를 골라 보세요.';list(D.prompts.filter(function(p){return p.cat===cat}));return}
+ $('sub').textContent='카테고리를 고르면 프롬프트가 나와요.';
+ D.cats.forEach(function(c){var n=D.prompts.filter(function(p){return p.cat===c.name}).length,k=el('button','card'),t=el('div');k.style.setProperty('--ac',ci(c.name));
+  t.appendChild(el('b','',c.name));t.appendChild(el('small','',c.desc));k.appendChild(t);k.appendChild(el('i','',n+'개'));k.onclick=function(){cat=c.name;render()};m.appendChild(k)});
+ if(!D.cats.length)m.innerHTML='<div class="state">등록된 프롬프트가 없어요.</div>'}
+
+function list(a){var m=$('main');if(!a.length){m.innerHTML='<div class="state">조건에 맞는 프롬프트가 없어요.</div>';return}
+ a.forEach(function(p){var k=el('button','card tile'+(p.versions.every(function(v){return v.hidden})?' hid':'')),t=el('div');k.style.setProperty('--ac',ci(p.cat));
+  t.appendChild(el('span','ic',p.icon||'✨'));t.appendChild(el('b','',p.title));if(p.tag)t.appendChild(el('small','',p.tag));k.appendChild(t);
+  if(p.versions.length>1)k.appendChild(el('i','','v'+p.versions.length));k.onclick=function(){open(p,0)};m.appendChild(k)})}
+
+function open(p,i){cur=p;vi=i;$('sc').classList.add('on');draw()}
+function close(){$('sc').classList.remove('on');$('sheet').className='sheet'}
+function ba(v){if(!v.before&&!v.after)return null;var w=el('div','ba');
+ if(v.before&&v.after){var a=el('img');a.src=img(v.after);a.alt='애프터';var b=el('img','bf');b.src=img(v.before);b.alt='비포';w.appendChild(a);w.appendChild(b);w.appendChild(el('div','ln'));w.appendChild(el('div','kn','↔'));
+  var l1=el('span','lb','BEFORE');l1.style.left='8px';var l2=el('span','lb','AFTER');l2.style.right='8px';w.appendChild(l1);w.appendChild(l2);
+  var r=el('input');r.type='range';r.min=0;r.max=100;r.value=50;r.setAttribute('aria-label','비포 애프터 비교');r.oninput=function(){w.style.setProperty('--p',r.value+'%')};w.appendChild(r)}
+ else{var o=el('img');o.src=img(v.after||v.before);w.appendChild(o);var l=el('span','lb',v.after?'AFTER':'BEFORE');l.style.left='8px';w.appendChild(l)}return w}
+
+function draw(){var v=cur.versions[vi],s=$('sheet');s.innerHTML='';s.className='sheet';
+ var h=el('div','hd'),t=el('div'),sb=el('div','',cur.cat);sb.style.cssText='color:#5b6b83;font-size:12.5px';t.appendChild(el('h2','',(cur.icon||'')+' '+cur.title));t.appendChild(sb);
+ var x=el('button','x','✕');x.setAttribute('aria-label','닫기');x.onclick=close;h.appendChild(t);h.appendChild(x);s.appendChild(h);
+ if(cur.versions.length>1){var vs=el('div','vers');cur.versions.forEach(function(z,i){var b=el('button','ver',z.name+(z.hidden?' (비공개)':''));b.setAttribute('aria-pressed',i===vi);b.onclick=function(){vi=i;draw()};vs.appendChild(b)});s.appendChild(vs)}
+ var w=ba(v);if(w)s.appendChild(w);
+ var bd=el('div','bd');if(v.type)bd.appendChild(el('span','b',v.type));if(v.photo)bd.appendChild(el('span','b p','📷 사진을 함께 올려야 해요'));s.appendChild(bd);
+ if(v.guide)s.appendChild(el('div','gd',v.guide));s.appendChild(el('div','body',v.body));
+ var ac=el('div','acts'),c=el('button','btn m','📋 복사하기'),d=el('button','btn','⬇ 텍스트 저장');c.onclick=function(){cp(v.body)};d.onclick=function(){dl(v)};ac.appendChild(c);ac.appendChild(d);s.appendChild(ac);
+ if(v.next){var n=el('div','nx','다음 단계: ');var tg=D.prompts.filter(function(p){return p.title===v.next})[0];if(tg){var bt=el('button','',v.next);bt.onclick=function(){open(tg,0)};n.appendChild(bt)}else n.appendChild(document.createTextNode(v.next));s.appendChild(n)}
+ if(T){var ad=el('div','acts');ad.style.cssText='margin-top:14px;padding-top:12px;border-top:1px dashed #dbe4f0';
+  var e=el('button','btn','✎ 수정'),a=el('button','btn','＋ 버전 추가'),r=el('button','btn r','🗑 삭제');
+  e.onclick=function(){form(v,cur)};a.onclick=function(){form({name:'',type:v.type,photo:v.photo},cur,true)};
+  r.onclick=function(){if(r.dataset.k){call('adminDelete',T,v.id).then(function(){toast('삭제했어요');close();load()},function(er){toast(er.message)})}else{r.dataset.k=1;r.textContent='한 번 더 누르면 삭제';setTimeout(function(){r.dataset.k='';r.textContent='🗑 삭제'},3000)}};
+  ad.appendChild(e);ad.appendChild(a);ad.appendChild(r);s.appendChild(ad)}}
+
+function cp(t){function ok(o){toast(o?'복사했어요':'복사가 안 돼요. 텍스트 저장을 이용하세요')}
+ function old(){var a=el('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();var o=false;try{o=document.execCommand('copy')}catch(e){}document.body.removeChild(a);return o}
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){ok(true)},function(){ok(old())});else ok(old())}
+function dl(v){var a=el('a');a.href=URL.createObjectURL(new Blob(['\uFEFF'+v.body],{type:'text/plain;charset=utf-8'}));a.download=(cur.title+'_'+v.name).replace(/[\\/:*?"<>|]/g,'')+'.txt';document.body.appendChild(a);a.click();document.body.removeChild(a)}
+
+function login(){var s=$('sheet');s.innerHTML='';s.className='sheet fm';s.appendChild(el('h2','','관리자 로그인'));s.appendChild(el('label','','비밀번호'));var i=el('input');i.type='password';i.autocomplete='current-password';s.appendChild(i);
+ var b=el('button','btn m','로그인');b.style.marginTop='14px';b.onclick=function(){b.disabled=true;call('adminLogin',i.value).then(function(t){T=t;ui();close();toast('관리자 모드');load()},function(e){b.disabled=false;toast(e.message)})};i.onkeydown=function(e){if(e.key==='Enter')b.click()};s.appendChild(b);$('sc').classList.add('on');i.focus()}
+
+function form(v,p,isNew){var s=$('sheet');s.innerHTML='';s.className='sheet fm';var isAdd=!p;p=p||{cat:cat||'',title:'',icon:'',tag:''};v=v||{};var F={};
+ s.appendChild(el('h2','',isAdd||isNew?'프롬프트 추가':'프롬프트 수정'));
+ function f(k,lb,tag,val,opt){s.appendChild(el('label','',lb));var e=el(tag);if(opt)opt.forEach(function(o){var z=el('option','',o);z.value=o;e.appendChild(z)});e.value=val==null?'':val;F[k]=e;s.appendChild(e);return e}
+ f('카테고리','카테고리 (새 이름을 쓰면 새 카테고리가 생겨요)','input',p.cat).setAttribute('list','cl');var dl=el('datalist');dl.id='cl';D.cats.forEach(function(x){var o=el('option');o.value=x.name;dl.appendChild(o)});s.appendChild(dl);
+ f('제목','제목 (8~12자 권장)','input',p.title);f('한줄설명','한줄설명 (목록 타일에 표시)','input',p.tag);f('아이콘','아이콘 (이모지 1개)','input',p.icon);f('버전명','버전명 (예: 기본, 간단, 상세)','input',v.name||'기본');
+ f('유형','유형','select',v.type||'이미지 생성',['이미지 생성','텍스트']);f('사진필요','사진 필요 여부','select',v.photo?'필요':'불필요',['필요','불필요']);
+ f('안내문','안내문 (바꿀 곳 설명)','textarea',v.guide);f('본문','본문 (프롬프트)','textarea',v.body).style.minHeight='180px';f('다음단계','다음 단계 안내','textarea',v.next);
+ f('공개','공개 여부','select',v.hidden?'비공개':'공개',['공개','비공개']);
+ var files={};[['비포','샘플 사진 — BEFORE (원본)','before'],['애프터','샘플 사진 — AFTER (결과)','after']].forEach(function(k){s.appendChild(el('label','',k[1]));var i=el('input'),pv=el('img');i.type='file';i.accept='image/*';pv.style.display='none';
+  if(v[k[2]]){pv.src=img(v[k[2]]);pv.style.display='block'}i.onchange=function(){if(i.files[0]){files[k[0]]=i.files[0];pv.src=URL.createObjectURL(i.files[0]);pv.style.display='block'}};s.appendChild(i);s.appendChild(pv);
+  var rm=el('button','btn','사진 지우기');rm.style.cssText='margin-top:6px;padding:5px 12px;font-size:12px';rm.onclick=function(){files[k[0]]=null;pv.style.display='none';i.value=''};s.appendChild(rm)});
+ var ac=el('div','acts'),sv=el('button','btn m','저장'),cn=el('button','btn','취소');ac.style.marginTop='16px';cn.onclick=close;
+ sv.onclick=function(){if(!F['제목'].value.trim()||!F['본문'].value.trim()||!F['카테고리'].value.trim()){toast('카테고리·제목·본문은 꼭 필요해요');return}
+  sv.disabled=true;sv.textContent='저장 중…';var rec={};if(!isAdd&&!isNew)rec.id=v.id;for(var k in F)rec[k]=F[k].value.trim();
+  rec['비포']=v.before||'';rec['애프터']=v.after||'';
+  var jobs=['비포','애프터'].map(function(k){if(files[k]===undefined)return Promise.resolve();if(files[k]===null){rec[k]='';return Promise.resolve()}return shrink(files[k]).then(function(u){return call('adminUpload',T,u)}).then(function(id){rec[k]=id})});
+  Promise.all(jobs).then(function(){return call('adminSave',T,rec)}).then(function(){toast('저장했어요');close();load()},function(e){sv.disabled=false;sv.textContent='저장';toast(e.message||'저장하지 못했어요')})};
+ ac.appendChild(sv);ac.appendChild(cn);s.appendChild(ac);$('sc').classList.add('on')}
+function shrink(file){return new Promise(function(ok){var r=new FileReader();r.onload=function(){var m=new Image();m.onload=function(){var k=Math.min(1,1280/Math.max(m.width,m.height)),c=document.createElement('canvas');c.width=Math.round(m.width*k);c.height=Math.round(m.height*k);c.getContext('2d').drawImage(m,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',.85))};m.src=r.result};r.readAsDataURL(file)})}
+
+$('sc').onclick=function(e){if(e.target===this)close()};document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+$('q').oninput=function(){q=this.value;render()};
+$('loginBtn').onclick=login;$('outBtn').onclick=function(){T=null;ui();toast('로그아웃했어요');load()};$('addBtn').onclick=function(){form(null,null,true)};
+load();
+})();
+</script></body></html>

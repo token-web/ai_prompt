@@ -1,0 +1,6 @@
+{
+  "name": "AI 프롬프트 모음 - AI Insight Lab",
+  "description": "정한열 교수의 AI 프롬프트 모음 웹 앱. 실시간 검색, 한글/영문 듀얼 프롬프트 지원, 비포/애프터 비교 슬라이더, 관리자 모드 제공.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
