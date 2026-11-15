@@ -10,6 +10,8 @@
 window.__FIREBASE_CONFIG__ = {
   authDomain: "ai-prompt-b5c6c.firebaseapp.com",
   projectId: "ai-prompt-b5c6c",
+  storageBucket: "ai-prompt-b5c6c.firebasestorage.app",
+  messagingSenderId: "932020643030",
   appId: "1:932020643030:web:fb5a53e2e846ba69539577"
 };
 
