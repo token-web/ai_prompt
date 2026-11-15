@@ -9,10 +9,10 @@
  */
 window.__FIREBASE_CONFIG__ = {
   apiKey: "여기에 apiKey",
-  authDomain: "여기에 authDomain",
-  projectId: "여기에 projectId",
-  appId: "여기에 appId"
+  authDomain: "ai-prompt-b5c6c.firebaseapp.com",
+  projectId: "ai-prompt-b5c6c",
+  appId: "1:932020643030:web:fb5a53e2e846ba69539577"
 };
 
 // 관리자로 허용할 구글 이메일 (소문자로 정확히)
-window.__ADMIN_EMAILS__ = ["여기에-본인-구글-이메일@gmail.com"];
+window.__ADMIN_EMAILS__ = ["aiinsightlabkr@gmail.com"];
