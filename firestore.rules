@@ -1,0 +1,36 @@
+// Firebase 콘솔 → Firestore Database → '규칙' 탭에 이 내용을 통째로 붙여 넣고 [게시]를 누르세요.
+// ★ 아래 대괄호 안의 이메일을 firebase-config.js 의 __ADMIN_EMAILS__ 와 같은 관리자 구글 이메일로 바꾼 뒤 게시하세요.
+//   (여러 명이면 ['a@gmail.com', 'b@gmail.com'] 처럼 쉼표로 구분)
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in ['여기에-관리자-이메일@gmail.com'];
+    }
+
+    // 학생용 공개 데이터: 누구나 읽기, 관리자만 쓰기
+    match /appData/public {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 관리자용 전체 데이터('숨김' 포함): 관리자만 읽기/쓰기
+    match /appData/full {
+      allow read, write: if isAdmin();
+    }
+
+    // 업로드한 사진: 누구나 읽기, 관리자만 쓰기
+    match /images/{imageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 그 밖의 모든 곳은 막기
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
