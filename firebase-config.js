@@ -8,7 +8,6 @@
  *  3) 저장(커밋)하면 1~2분 뒤 사이트에 반영됩니다.
  */
 window.__FIREBASE_CONFIG__ = {
-  apiKey: "여기에 apiKey",
   authDomain: "ai-prompt-b5c6c.firebaseapp.com",
   projectId: "ai-prompt-b5c6c",
   appId: "1:932020643030:web:fb5a53e2e846ba69539577"
